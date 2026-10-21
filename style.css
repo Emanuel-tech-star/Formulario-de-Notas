@@ -1,0 +1,204 @@
+:root {
+  --noite: #101b3f;
+  --noite-2: #1a2a5c;
+  --papel: #f4f6fc;
+  --giz: #ffd23f;
+  --texto: #1b2440;
+  --suave: #5b6585;
+  --linha: #cbd3ee;
+  --verde: #12875a;
+  --vermelho: #d63a47;
+  --ambar: #b87400;
+}
+
+* { box-sizing: border-box; margin: 0; }
+
+body {
+  font-family: "DM Sans", system-ui, sans-serif;
+  background:
+    radial-gradient(900px 400px at 85% -10%, var(--noite-2), transparent 70%),
+    var(--noite);
+  color: var(--texto);
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+.layout {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: clamp(24px, 5vw, 56px) 20px 64px;
+  display: grid;
+  gap: 28px;
+}
+
+/* ---------- Cabeçalho ---------- */
+.intro { color: #e8ecfa; }
+.intro p { max-width: 54ch; color: #b9c2e3; }
+.intro h1 {
+  font-family: "Bricolage Grotesque", system-ui, sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.3rem, 7vw, 4.2rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin: 14px 0 14px;
+  color: #fff;
+}
+.selo {
+  display: inline-block;
+  background: var(--giz);
+  color: var(--noite);
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 5px 14px;
+  border-radius: 999px;
+}
+
+/* ---------- Layout principal ---------- */
+.grade { display: grid; gap: 24px; grid-template-columns: 1fr; }
+@media (min-width: 860px) {
+  .grade { grid-template-columns: 1.05fr 0.95fr; align-items: start; }
+}
+
+/* ---------- Folha de papel ---------- */
+.papel {
+  background:
+    repeating-linear-gradient(transparent 0 31px, rgba(80, 110, 200, 0.09) 31px 32px),
+    var(--papel);
+  border-radius: 6px 24px 6px 24px;
+  padding: clamp(20px, 4vw, 32px);
+  box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.55);
+}
+.papel h2 {
+  font-family: "Bricolage Grotesque", system-ui, sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: -0.01em;
+  margin-bottom: 18px;
+}
+
+/* ---------- Formulário ---------- */
+.campo { display: grid; gap: 6px; margin-bottom: 16px; }
+.campo > span, legend { font-weight: 700; font-size: 0.95rem; }
+
+input {
+  font: inherit;
+  width: 100%;
+  padding: 12px 14px;
+  border: 2px solid var(--linha);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--texto);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+input::placeholder { color: #98a1c0; }
+input:focus-visible {
+  outline: none;
+  border-color: var(--noite-2);
+  box-shadow: 0 0 0 4px rgba(255, 210, 63, 0.55);
+}
+input.invalido { border-color: var(--vermelho); }
+
+fieldset { border: 0; padding: 0; margin: 4px 0 8px; min-width: 0; }
+legend { margin-bottom: 10px; padding: 0; }
+
+.notas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(118px, 1fr));
+  gap: 12px;
+}
+.nota { display: grid; gap: 4px; }
+.nota span { font-size: 0.82rem; color: var(--suave); font-weight: 500; }
+.nota input { text-align: center; font-weight: 700; font-size: 1.1rem; }
+
+.erro { min-height: 1.4em; color: var(--vermelho); font-weight: 500; font-size: 0.92rem; margin: 6px 0; }
+
+.acoes { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
+.btn {
+  font: inherit;
+  font-weight: 700;
+  padding: 13px 22px;
+  border-radius: 12px;
+  border: 2px solid var(--noite);
+  cursor: pointer;
+  transition: transform 0.12s, background 0.15s, color 0.15s;
+}
+.btn:active { transform: translateY(1px); }
+.btn:focus-visible { outline: 3px solid var(--giz); outline-offset: 3px; }
+.principal { background: var(--noite); color: #fff; flex: 1 1 180px; }
+.principal:hover { background: var(--giz); color: var(--noite); }
+.secundario { background: transparent; color: var(--noite); }
+.secundario:hover { background: var(--noite); color: #fff; }
+
+/* ---------- Resultado ---------- */
+.resultado { position: relative; overflow: hidden; min-height: 320px; }
+.vazio { color: var(--suave); display: grid; gap: 6px; padding: 18px 0; }
+
+.media-label { color: var(--suave); font-weight: 500; }
+.media {
+  font-family: "Bricolage Grotesque", system-ui, sans-serif;
+  font-weight: 800;
+  font-size: clamp(4rem, 14vw, 6rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+.media small { font-size: 1.6rem; color: var(--suave); font-weight: 600; margin-left: 4px; letter-spacing: 0; }
+
+.medidor { position: relative; margin: 18px 0 8px; padding-bottom: 22px; }
+.trilho { height: 14px; background: #dfe4f5; border-radius: 99px; overflow: hidden; }
+.barra { height: 100%; width: 0; border-radius: 99px; background: var(--vermelho); transition: width 0.9s cubic-bezier(0.2, 0.8, 0.2, 1), background 0.3s; }
+.marca {
+  position: absolute; left: 50%; top: -4px; transform: translateX(-50%);
+  height: 22px; border-left: 2px dashed var(--noite);
+}
+.marca { padding-left: 0; font-size: 0; }
+.medidor::after {
+  content: "mínimo para aprovar: 10";
+  position: absolute; left: 50%; bottom: 0; transform: translateX(-50%);
+  font-size: 0.78rem; color: var(--suave); white-space: nowrap;
+}
+
+.mensagem { font-size: 1.15rem; font-weight: 500; margin: 8px 0 18px; max-width: 42ch; }
+.mensagem strong { font-weight: 800; }
+
+.dados { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.dados div { background: #fff; border: 2px solid var(--linha); border-radius: 12px; padding: 10px 14px; }
+.dados dt { font-size: 0.8rem; color: var(--suave); }
+.dados dd { font-weight: 800; font-size: 1.3rem; }
+
+/* O carimbo: o momento principal da página */
+.carimbo {
+  position: absolute; top: 20px; right: 18px;
+  font-family: "Bricolage Grotesque", system-ui, sans-serif;
+  font-weight: 800; font-size: 1.15rem; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 6px 14px;
+  border: 4px double currentColor;
+  border-radius: 8px;
+  transform: rotate(-8deg);
+  background: rgba(255, 255, 255, 0.6);
+}
+.carimbo.aprovado { color: var(--verde); }
+.carimbo.reprovado { color: var(--vermelho); }
+.carimbo.bater { animation: carimbo 0.45s cubic-bezier(0.2, 1.4, 0.4, 1) both; }
+
+@keyframes carimbo {
+  from { opacity: 0; transform: rotate(-8deg) scale(2.4); }
+  to   { opacity: 1; transform: rotate(-8deg) scale(1); }
+}
+
+/* ---------- Histórico ---------- */
+.historico ul { list-style: none; padding: 0; display: grid; gap: 8px; }
+.historico li {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px;
+  background: #fff; border: 2px solid var(--linha); border-radius: 12px; padding: 10px 14px;
+}
+.historico .estado { font-weight: 700; }
+.historico .ok { color: var(--verde); }
+.historico .nao { color: var(--vermelho); }
+
+/* ---------- Acessibilidade ---------- */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
+@media (max-width: 480px) {
+  .carimbo { position: static; display: inline-block; margin-bottom: 14px; }
+}

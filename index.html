@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pauta de notas | Calculadora de média escolar</title>
+  <meta name="description" content="Calcula a média das provas e descobre se o aluno aprovou.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="layout">
+
+    <header class="intro">
+      <span class="selo">Escala de 0 a 20. Aprova com 10 ou mais.</span>
+      <h1>Faz as contas da pauta</h1>
+      <p>Escreve o nome do aluno, diz quantas provas fez e coloca as notas. A média e o resultado aparecem logo.</p>
+    </header>
+
+    <div class="grade">
+
+      <!-- FORMULÁRIO -->
+      <section class="papel" aria-labelledby="tit-form">
+        <h2 id="tit-form">Dados do aluno</h2>
+        <form id="form" novalidate>
+          <label class="campo">
+            <span>Nome do aluno</span>
+            <input id="nome" type="text" placeholder="Ex.: Jorge Manuel" maxlength="60" autocomplete="off" required>
+          </label>
+
+          <label class="campo">
+            <span>Quantas provas fez? (1 a 12)</span>
+            <input id="qtd" type="number" min="1" max="12" inputmode="numeric" placeholder="Ex.: 4" required>
+          </label>
+
+          <fieldset id="notas" hidden>
+            <legend>Nota de cada prova</legend>
+            <div id="campos" class="notas-grid"></div>
+          </fieldset>
+
+          <p id="erro" class="erro" role="alert"></p>
+
+          <div class="acoes">
+            <button type="submit" id="calcular" class="btn principal" hidden>Calcular média</button>
+            <button type="button" id="limpar" class="btn secundario">Limpar tudo</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- RESULTADO -->
+      <section class="papel resultado" aria-labelledby="tit-res" aria-live="polite">
+        <h2 id="tit-res">Resultado</h2>
+
+        <div id="vazio" class="vazio">
+          <p>A pauta ainda está em branco.</p>
+          <p>Preenche o formulário e carrega em <strong>Calcular média</strong>.</p>
+        </div>
+
+        <div id="conteudo" hidden>
+          <div id="carimbo" class="carimbo"></div>
+
+          <p class="media-label">Média final</p>
+          <p class="media"><span id="media">0</span><small>/20</small></p>
+
+          <div class="medidor" aria-hidden="true">
+            <div class="trilho"><div id="barra" class="barra"></div></div>
+            <span class="marca">10</span>
+          </div>
+
+          <p id="mensagem" class="mensagem"></p>
+
+          <dl class="dados">
+            <div><dt>Soma</dt><dd id="soma">0</dd></div>
+            <div><dt>Provas</dt><dd id="total">0</dd></div>
+            <div><dt>Maior nota</dt><dd id="maior">0</dd></div>
+            <div><dt>Menor nota</dt><dd id="menor">0</dd></div>
+          </dl>
+        </div>
+      </section>
+    </div>
+
+    <!-- HISTÓRICO -->
+    <section id="historico" class="papel historico" hidden aria-labelledby="tit-hist">
+      <h2 id="tit-hist">Alunos calculados</h2>
+      <ul id="lista"></ul>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
